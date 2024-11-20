@@ -12,30 +12,18 @@ except socket.error as err:
 server_binding = ("localhost", 9999)
 cs.connect(server_binding)
 
-# recieve data from server: Welcome to Blueprint  
 data_from_server=cs.recv(1024)
-message = data_from_server.decode()
 print("[C]: Data received from server: " + message)    
 cs.send(input("Response here: ").encode())
 
-# IN GROUPS
+email = input("Enter your email: ")
+cs.send(email.encode())
 
-# receive data from server: How are you
-data_from_server=cs.recv(1024)
-message = data_from_server.decode()
-print("[C]: Data received from server: " + message)    
-cs.send(input("Response here: ").encode())
+password = input("Enter your password: ")
+cs.send(password.encode())
 
-count = 0
-while(count < 5): # use loop to send 1, 2, 3, 4, 5 to client
-    response = cs.recv(1024).decode()
-    print("[C]: Data received from server: " + response)
-    response = "Acknowledging " + str(count)
-    cs.send(response.encode())
-    count+=1
+login_response = cs.recv(1024)
+print("[C]: Login response from server: " + login_response.decode())
 
-print("Done")
-
-# close the client sockets
 cs.close()
-exit()
+print("[C]: Connection closed")
