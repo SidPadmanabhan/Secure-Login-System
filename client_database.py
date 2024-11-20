@@ -10,9 +10,12 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS users
                    name TEXT,
                    email TEXT)''')
 # Insert data into the table
-cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("john@example.com", "johnny"))
-cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("jane@example.com", "jane123" ))
-cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("goat@example.com", "iamthegoat"))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("john@gmail.com", "johnny"))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("jane@gmail.com", "jane123" ))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("goat@gmail.com", "iamthegoat"))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("franksinatra@gmail.com", "music55" ))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("drake@gmail.com", "drizzy"))
+
 
 
 # Commit the changes and close the connection
