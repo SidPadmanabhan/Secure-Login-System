@@ -15,45 +15,40 @@ ss.bind(server_binding)
 ss.listen()
 
 
-def start_connection(c): # taking client as parameter
-    msg = "Welcome to Blueprint squad!"
-    c.send(msg.encode())
-    """ reponse = "THANK YOU!"
-                    "no." "im sleepy"
-                    variable. --> we need something to pull the client's response.
-    """
+def verify(email, password):
+    try: 
+        conn = sqlite3.connect('mydatabase.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE email = ? and password = ?", (email, password))
+        user = cursor.fetchone()
+        conn.close()
+        return user is not None
+    except Exception as e:
+        print(f"[S]: Database error: {e}")
+        return False
 
-    response = c.recv(1024).decode() # 1024 bytes tells us the size / buffer of the content we are recieving so that the socket knows how much to expect
-    print("[S]: Data received from client: " + response)    
+def start_connection(client_socket): # taking client as parameter
+    msg = "Welcome to Blueprint! Log in"
+    client_socket.send(msg.encode())
 
+    #receive email and password
+    client_socket.send("Enter your email:".encode())
+    email = client_socket.recv(1024).decode()
+
+    client_socket.send("Enter your password:".encode())
+    password = client_socket.recv(1024).decode()
+
+    if verify(email, password):
+        client_socket.send("Login Successful".encode())
+    else:
+        client_socket.send("Invalid Login".encode())
+
+    client_socket.close()
     
-    # DO IN GROUPS INDEPENDENTLY
-    
-    # make own riddle / joke & respond with answer
-
-    msg = "How are you?"
-    c.send(msg.encode())
-
-    response = c.recv(1024).decode()
-    print("[S]: Data received from client: " + response)    
-
-    # use loop to send 1, 2, 3, 4, 5 to client --> you can only send strings 
-
-    count = 0
-    while(count < 5): # use loop to send 1, 2, 3, 4, 5 to client --> you can only send strings 
-        c.send(str(count).encode())
-        response = c.recv(1024).decode()
-        print("[S]: Data received from client: " + response)
-        count+=1
-
-    print("Done")
-
-
 while True:
-    client, addr = ss.accept()
-    t2 = threading.Thread(target=start_connection, args=(client,))
-    t2.start()
+    try: 
+        client_socket, client_address = ss.accept()
+        print(f"[S]: Connection established with {client address})")
 
-    # Close the server socket
-    ss.close()
-    exit()
+    client_thread = threading.Thread(target=start_connection, args = (client_socket,))
+    client_thread.start()
