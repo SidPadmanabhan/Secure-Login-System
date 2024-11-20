@@ -5,10 +5,12 @@ conn = sqlite3.connect('mydatabase.db')
 cursor = conn.cursor()
 
 # Create a table
+# Create a table with columns: id, email, and password
 cursor.execute('''CREATE TABLE IF NOT EXISTS users
                   (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                   name TEXT,
-                   email TEXT)''')
+                   email TEXT NOT NULL UNIQUE,
+                   password TEXT NOT NULL)''')
+
 # Insert data into the table
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("john@gmail.com", "johnny"))
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("jane@gmail.com", "jane123" ))
@@ -20,22 +22,16 @@ cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("aaronrodge
 
 
 
-
 # Commit the changes and close the connection
 conn.commit()
-conn.close()
 
-# Retrieve data from the table
-conn = sqlite3.connect('mydatabase.db')
-cursor = conn.cursor()
-cursor.execute("SELECT * FROM users")
+cursor.execute("SELECT email, password FROM users")
 rows = cursor.fetchall()
 
-# Display the retrieved data
-for row in rows:
-    print(f"ID: {row[0]}, Name: {row[1]}, Email: {row[2]}")
+print("Stored User Credentials:")
+for row in rows: 
+  print(f"Email: {row[0]}, Password: {row[1]}")
 
-# Close the connection
 conn.close()
 
 
