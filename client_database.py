@@ -12,9 +12,12 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS users
 # Insert data into the table
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("john@gmail.com", "johnny"))
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("jane@gmail.com", "jane123" ))
-cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("goat@gmail.com", "iamthegoat"))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("goat@gmail.com", "iamlebron"))
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("franksinatra@gmail.com", "music55" ))
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("drake@gmail.com", "drizzy"))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("abeltesfaye@gmail.com", "theweeknd23" ))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("aaronrodgers", "ifellof"))
+
 
 
 
