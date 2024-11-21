@@ -18,7 +18,7 @@ cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("goat@gmail
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("franksinatra@gmail.com", "music55" ))
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("drake@gmail.com", "drizzy"))
 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("abeltesfaye@gmail.com", "theweeknd23" ))
-cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("aaronrodgers", "ifellof"))
+cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ("aaronrodgers@gmail.com", "ifelloff"))
 
 
 
