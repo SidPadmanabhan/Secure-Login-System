@@ -56,7 +56,6 @@ def start_connection(client_socket):
         print("[S]: Connection closed")
 
 
-# Main server loop
 try:
     while True:
         client_socket, client_address = ss.accept()
